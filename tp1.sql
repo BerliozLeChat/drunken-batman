@@ -70,3 +70,14 @@ insert into CLIENTS
 values (4,'blup','dédé','somewhere',66666666);
 
 --Table Livres
+insert into LIVRES
+values (1,'50 shade of grey',66666666);
+
+insert into LIVRES
+values (2,'dupond','michel','somewhere',66666666);
+
+insert into LIVRES
+values (2'blop','jacques','somewhere',66666666);
+
+insert into LIVRES
+values (3'blup','dédé','somewhere',66666666);
