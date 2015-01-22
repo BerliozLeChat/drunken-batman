@@ -111,7 +111,10 @@ values (4,'4589632588',18,null);
 --2/Les livres qui obtiennent une note moyenne supérieure à 16.
  select titre, auteur, genre from livres natural join avis
 group by refl having sum(note)/(select count(refl) from avis)>=16;
+---------------------------------------------------------------------------------
 
+--3/Les clients qui n'ont pas renseigné l'attribut commentaire d'un livre
+-- (quel client, livre, note).
 select nom, pren, titre, note from clients,livres, avis where
 commentaire = null;
  
