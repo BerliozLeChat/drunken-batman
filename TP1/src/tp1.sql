@@ -89,7 +89,29 @@ values (2,'4589632588','15-02-2009');
 insert into ACHATS
 values (2,'4589632589','16-02-2009');
 
+insert into ACHATS
+values (4,'4589632589','16-12-2009');
+
 --Table Avis
 insert into AVIS
 values (2,'4589632588',99.99,'Cool, cool cool cool');
 
+insert into AVIS
+values (4,'4589632588',18,null);
+
+
+--------Les requêtes---------------------------
+
+--1/ Les meilleures ventes : les livres (titre, auteur, genre) qui ont été achetés
+-- en plus de 10000 exemplaires.
+ select titre, auteur, genre from livres where 
+ (select count(refl) from achats where refl = livres.refl)>=10000;
+---------------------------------------------------------------------------------
+
+--2/Les livres qui obtiennent une note moyenne supérieure à 16.
+ select titre, auteur, genre from livres natural join avis
+group by refl having sum(note)/(select count(refl) from avis)>=16;
+
+select nom, pren, titre, note from clients,livres, avis where
+commentaire = null;
+ 
