@@ -23,7 +23,7 @@ create table CLIENTS(
 
 create table LIVRES(
   refl varchar2(10) primary key not null,
-  titre varchar2(20), 
+  titre varchar2(50), 
   auteur varchar2(20), 
   genre varchar2(15)
 );
@@ -71,13 +71,25 @@ values (4,'blup','dédé','somewhere',66666666);
 
 --Table Livres
 insert into LIVRES
-values (1,'50 shade of grey',66666666);
+values ('4589632587','Fifty Shades of grey','E.L.James','Erotique');
 
 insert into LIVRES
-values (2,'dupond','michel','somewhere',66666666);
+values ('4589632588','Fifty Shades Darker','E.L.James','Erotique');
 
 insert into LIVRES
-values (2'blop','jacques','somewhere',66666666);
+values ('4589632589','Fifty Shades Freed','E.L.James','Erotique');
 
-insert into LIVRES
-values (3'blup','dédé','somewhere',66666666);
+--Table Achats
+insert into ACHATS
+values (2,'4589632587','14-02-2009');
+
+insert into ACHATS
+values (2,'4589632588','15-02-2009');
+
+insert into ACHATS
+values (2,'4589632589','16-02-2009');
+
+--Table Avis
+insert into AVIS
+values (2,'4589632588',99.99,'Cool, cool cool cool');
+
