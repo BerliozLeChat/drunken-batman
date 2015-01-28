@@ -5,7 +5,12 @@ Licence 3 informatique
 Université de Nantes
 */
 
-
+/*
+drop table Clients cascade constraints;
+drop table Livres cascade constraints;
+drop table Achats cascade constraints;
+drop table Avis cascade constraints;
+*/
 
 -- Déclaration
 create table Clients ( idcl number       not null,
@@ -28,13 +33,17 @@ create table Achats ( idcl      number       not null,
                     foreign key (idcl) references Clients,
                     foreign key (refl) references Livres );
 
+alter table Achats
+add constraint check_date_achats
+check ( dateachat between to_date('01-01-2008', 'dd-mm-yyyy') and to_date('31-12-2013', 'dd-mm-yyyy') );
+
 create table Avis ( idcl number       not null,
                     refl varchar2(10) not null,
                     note number(4,2)  not null,
                     commentaire varchar2(50),
                   primary key (idcl, refl),
-                  foreign key (idcl) references Achats,
-                  foreign key (refl) references Achats );
+                  foreign key (idcl) references Clients,
+                  foreign key (refl) references Livres );
 
 -- Insertion
 insert into Clients values (0, 'nom0', 'pren0', 'adr0', 'tel0');
@@ -59,16 +68,16 @@ insert into Livres values ('refl7', 'titre7', 'auteur7', 'genre7');
 insert into Livres values ('refl8', 'titre8', 'auteur8', 'genre8');
 insert into Livres values ('refl9', 'titre9', 'auteur9', 'genre9');
 
-insert into Achats values (0, 'refl0', current_date);
-insert into Achats values (0, 'refl1', current_date);
-insert into Achats values (0, 'refl2', current_date);
-insert into Achats values (0, 'refl3', current_date);
-insert into Achats values (0, 'refl4', current_date);
-insert into Achats values (1, 'refl5', current_date);
-insert into Achats values (1, 'refl6', current_date);
-insert into Achats values (1, 'refl7', current_date);
-insert into Achats values (1, 'refl8', current_date);
-insert into Achats values (1, 'refl9', current_date);
+insert into Achats values (0, 'refl0', to_date('02-01-2008', 'dd-mm-yyyy') );
+insert into Achats values (0, 'refl1', to_date('02-01-2008', 'dd-mm-yyyy') );
+insert into Achats values (0, 'refl2', to_date('02-01-2008', 'dd-mm-yyyy') );
+insert into Achats values (0, 'refl3', to_date('02-01-2008', 'dd-mm-yyyy') );
+insert into Achats values (0, 'refl4', to_date('02-01-2008', 'dd-mm-yyyy') );
+insert into Achats values (1, 'refl5', to_date('02-01-2008', 'dd-mm-yyyy') );
+insert into Achats values (1, 'refl6', to_date('02-01-2008', 'dd-mm-yyyy') );
+insert into Achats values (1, 'refl7', to_date('02-01-2008', 'dd-mm-yyyy') );
+insert into Achats values (1, 'refl8', to_date('02-01-2008', 'dd-mm-yyyy') );
+--insert into Achats values (1, 'refl9', current_date); -- Erreur: viol la contrainte check_date_achats
 
 insert into Avis values (0, 'refl0' ,15 , null);
 insert into Avis values (0, 'refl1' ,16 , 'commentaire1');
@@ -86,7 +95,7 @@ where ( select count(refl)
         where refl = livre.refl ) > 10000;
 
 --2. Les livres qui obtiennent une note moyenne supérieure à 16.
-select *
+select refl, note
 from Livres natural join Avis
 group by refl, note
 having sum(note)/count(refl) > 16;
