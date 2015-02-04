@@ -35,3 +35,8 @@ where refl = 'refl7' and idcl = 1;
 
 update Achats set prix = 10
 where refl = 'refl8' and idcl = 1;
+
+select idcl, dateachat, genre, prix
+from Achats natural join Livres
+group by idcl, dateachat, genre, prix
+order by idcl,dateachat;

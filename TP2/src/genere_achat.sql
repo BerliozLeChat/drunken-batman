@@ -22,6 +22,10 @@ column genre heading 'Genre'
 column prix format 999.9
 column prix heading "Prix"
 
+-- Ajout du calcul de la somme & de la moyenne
+break on idcl skip 1 on report
+compute avg sum of prix on idcl
+
 -- Autres paramètres
 set linesize 80
 set pagesize 30

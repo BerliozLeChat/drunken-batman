@@ -10,3 +10,5 @@ Université de Nantes
 create sequence seqClients start with 20 increment by 1 ;
 insert into Clients values(seqClients.nextval, 'toto','titi','adr', 'tel') ;
 
+
+
